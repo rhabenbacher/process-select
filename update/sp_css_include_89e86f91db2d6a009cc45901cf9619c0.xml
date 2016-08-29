@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_css_include">
+    <sp_css_include action="INSERT_OR_UPDATE">
+        <name>css</name>
+        <source>url</source>
+        <sp_css/>
+        <sys_class_name>sp_css_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2016-08-29 13:35:48</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_id>89e86f91db2d6a009cc45901cf9619c0</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>css</sys_name>
+        <sys_package display_value="process_select" source="x_70016_process_se">84ae10a3db9de6009cc45901cf961925</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="process_select">84ae10a3db9de6009cc45901cf961925</sys_scope>
+        <sys_update_name>sp_css_include_89e86f91db2d6a009cc45901cf9619c0</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2016-08-29 13:35:48</sys_updated_on>
+        <url>http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc.5/angular-material.min.css</url>
+    </sp_css_include>
+</record_update>

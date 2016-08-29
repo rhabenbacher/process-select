@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+    <element label="Survey" max_length="40" name="x_70016_process_se_survey" type="collection">
+        <element label="OptionValues" max_length="40" name="optionvalues" type="string"/>
+        <element label="QuestionId" max_length="20" name="questionid" type="decimal"/>
+        <element label="QuestionText" max_length="255" name="questiontext" type="string"/>
+        <element label="SurveyId" max_length="40" name="surveyid" type="string"/>
+    </element>
+</database>

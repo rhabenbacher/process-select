@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+    <element label="processes" max_length="40" name="x_70016_process_se_processes" type="collection">
+        <element label="hierarchy1" max_length="40" name="hierarchy1" type="string"/>
+        <element label="hierarchy2" max_length="40" name="hierarchy2" type="string"/>
+        <element label="image" max_length="40" name="image" type="user_image"/>
+        <element label="processName" max_length="40" name="processname" type="string"/>
+        <element label="processStep" max_length="40" name="processstep" type="string"/>
+    </element>
+</database>

@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <client_script><![CDATA[function($scope,$http,$q,$mdDialog,$location,$window,$parse){
+  var c = this;	
+	c.progressShow = false;
+  var url = 'https://dev26396.service-now.com/api/now/table/x_70016_process_se_processes';
+  var config = {}; 
+	//{headers:{authorization:'Basic '+base64Service.encode('admin:Service2016')}};
+  // Username Password Base64 Encoding for test only.
+  var deferred = $q.defer();
+
+
+  $http.get(url,config).then(function(data){
+    c.data = data.data.result;
+    for (var i=0;i<c.data.length;i++){
+      c.data[i].display = c.data[i].hierarchy1 + '/' + c.data[i].hierarchy2 + '/' + c.data[i].processname;
+      c.data[i].search = c.data[i].display.toLowerCase();
+    }
+		console.log(c.data);
+    deferred.resolve(c.data);
+  });
+	
+
+
+
+  c.getProcesses = function(query){
+		console.log(query);
+    if (c.data === undefined){
+			return deferred.promise;
+    }
+    
+		return query ? c.data.filter( createFilterFor(query) ) : c.data ;
+
+  };
+	
+	  
+  c.loadImage = function(obj) {
+    console.log('loadImage');
+    if (!obj){
+      return;
+    }
+    c.progressShow = true;
+    console.log(obj);
+    var urlImg="https://dev26396.service-now.com/api/now/attachment?sysparm_limit=1&table_sys_id="+obj.sys_id;
+    c.image = {title:obj.processname};
+    $http.get(urlImg).then(function(res){
+        console.log(res);
+        c.image.url=res.data.result[0].download_link;
+        c.image.style={'width':'100%','height':'auto'};
+        c.progressShow = false;
+				$mdDialog.show({
+          scope: $scope,
+          template: '<md-dialog aria-label="ProcessConfirmation" class="FullScreenDialog">'+
+          '<md-toolbar class="md-accent md-hue-3">'+
+          ' <div class="md-toolbar-tools">'+
+          '<h3 class="md-title">{{c.image.title}}</h3>'+
+          '</div></md-toolbar>'+
+          '<md-dialog-content>'+
+          ' <div class="md-dialog-content">'+
+          ' <div layout="row" layout-sm="column" layout-align="space-around">'+
+          ' <md-progress-circular ng-if="!loaded27" md-mode="indeterminate" class="md-accent md-hue-3"></md-progress-circular>'+
+          ' </div>'+
+          '  <img ng-src="{{c.image.url}}" ng-style="c.image.style" ng-load="imageLoaded()"/>'+
+          ' </div>'+
+          '</md-dialog-content>' +
+          '<md-dialog-actions layout="row">' +
+          '   <md-button ng-click="zoom(factor100)">100%</md-button>'+
+          '   <md-button ng-click="zoom(factor125)" hide-xs>125%</md-button>'+
+          '   <md-button ng-click="zoom(factor150)" hide-gt-xs>150%</md-button>'+
+          '    <span flex></span>'+
+          '    <md-button ng-click="cancel()">' +
+          '       Cancel' +
+          '   </md-button>' +
+          '    <md-button ng-click="nextStep()" class="md-accent">' +
+          '       Continue' +
+          '   </md-button>' +
+          '</md-dialog-actions>' +
+          '</md-dialog>',
+          parent: angular.element(document.body),
+          fullscreen:true,
+					controller: function DialogController($scope, $mdDialog) {
+						console.log('DialogControler');
+						console.log($scope.c.image);
+            $scope.factor150 = '150%';
+						$scope.factor125 = '125%';
+						$scope.factor100 = '100%';
+						$scope.hide = function() {
+							$mdDialog.hide();
+						};
+						$scope.cancel = function() {
+							$mdDialog.cancel();
+						};
+						$scope.nextStep = function() {
+							$mdDialog.hide();
+						};
+						$scope.imageLoaded = function(){
+								console.log('image loaded');
+								$scope.loaded27 = true;
+							};
+						$scope.zoom = function(factor){
+							$scope.c.image.style.width = factor;
+						};
+
+						
+          }
+
+    })
+        .then(function(answer) {
+        
+          // anpassen - was geht in servicenow
+          //$location.url('/next/step/?id='+obj.sys_id);
+          //$window.location.href = '/next/step/?id='+obj.sys_id;
+          //$window.location.href = 'https://www.google.de';
+          c.selectedProcess = undefined;
+          c.searchText = "";
+          $window.location.href = '/process_feedback/#?hierarchy1='+encodeURIComponent(obj.hierarchy1)+'&hierarchy2='+encodeURIComponent(obj.hierarchy2)+'&processname='+encodeURIComponent(obj.processname);
+          //?hierarchy1=hier1&hierarchy2=hier2&processname=processname
+        }, function() {
+       
+          c.selectedProcess = undefined;
+          c.searchText = "";
+          c.status = 'You cancelled the dialog.';
+        });
+
+    });
+  };
+
+
+
+  
+
+  function createFilterFor(query) {
+        var lowercaseQuery = angular.lowercase(query);
+        return function filterFn(state) {
+          return (state.search.indexOf(lowercaseQuery) >= 0);
+        };
+      }
+
+}
+]]></client_script>
+        <controller_as>c</controller_as>
+        <css>FullScreenDialog {
+  max-width:100%;
+  max-height:100%;
+  width: 90%;
+  height: 90%;
+  border-radius: 0;
+}
+.highlight {
+	color: black;
+	background: #eee;
+	border: 1px solid red;
+	border-radius: 2px;
+	margin: -1px;
+}
+
+.highlight:empty {
+	display: none;
+}
+</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description>Select a process</description>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id/>
+        <internal>false</internal>
+        <link/>
+        <name>process_select</name>
+        <option_schema/>
+        <public>true</public>
+        <roles/>
+        <script><![CDATA[(function() {
+  /* populate the 'data' object */
+  /* e.g., data.table = $sp.getValue('table'); */
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2016-08-29 13:26:02</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_id>d096ef51db2d6a009cc45901cf9619cc</sys_id>
+        <sys_mod_count>56</sys_mod_count>
+        <sys_name>process_select</sys_name>
+        <sys_package display_value="process_select" source="x_70016_process_se">84ae10a3db9de6009cc45901cf961925</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="process_select">84ae10a3db9de6009cc45901cf961925</sys_scope>
+        <sys_update_name>sp_widget_d096ef51db2d6a009cc45901cf9619cc</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2016-08-29 18:03:40</sys_updated_on>
+        <template><![CDATA[<div>
+<!-- your widget template -->
+  <md-content class="md-padding" layout="column">
+      <section>
+        <h2 class="md-title">Select a process</h2>
+      </section>
+      <section>
+        <md-autocomplete
+              md-selected-item-change="c.loadImage(c.selectedProcess)"
+              md-selected-item="c.selectedProcess"
+              md-search-text="c.searchText"
+              md-items="item in c.getProcesses(searchText)"
+              md-item-text="item.display"
+              md-min-length="0"
+              md-select-on-match ="true"
+              md-autoselect="true"           
+              placeholder="click or write">
+    <md-item-template>
+      <span md-highlight-text="c.searchText" md-highlight-flags="i">{{item.display}}</span>
+    </md-item-template>
+    <md-not-found>
+      No processes matching "{{c.searchText}}" could be found.
+    </md-not-found>
+  </md-autocomplete>
+      </section>
+   
+	<section layout="row" layout-sm="column" layout-align="space-around" ng-hide="!c.progressShow">
+      <md-progress-circular ng-if="c.progressShow" md-mode="indeterminate" class="md-accent"></md-progress-circular>
+  </section>		
+	
+  </md-content>
+</div>]]></template>
+    </sp_widget>
+</record_update>

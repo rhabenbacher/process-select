@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+    <element label="process_images" max_length="40" name="x_70016_process_se_process_images" type="collection">
+        <element label="images" max_length="1000000" name="images" type="string"/>
+        <element label="refId" max_length="40" name="refid" type="string"/>
+    </element>
+</database>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update sys_domain="global" table="asmt_metric_type">
+    <asmt_metric_type action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <allow_public>false</allow_public>
+        <allow_retake>false</allow_retake>
+        <anonymize>false</anonymize>
+        <business_rule display_value="Auto business rule for Assessments">b3bc2f14db2d2a009cc45901cf9619f0</business_rule>
+        <condition/>
+        <default_filter>-- None --</default_filter>
+        <delete_business_rule display_value="Auto deletion rule for Assessments">f3bc2f14db2d2a009cc45901cf9619f1</delete_business_rule>
+        <description/>
+        <disable_ui_action/>
+        <display_all_filters>false</display_all_filters>
+        <display_field>none</display_field>
+        <duration>1970-04-11 00:00:00</duration>
+        <enable_ui_action/>
+        <end_note/>
+        <enforce_condition>false</enforce_condition>
+        <evaluation_method>assessment</evaluation_method>
+        <filter_condition/>
+        <filter_table>x_70016_process_se_processes</filter_table>
+        <introduction/>
+        <job/>
+        <live_feed>false</live_feed>
+        <name>ProcessFeedback</name>
+        <notify_if_overdue>false</notify_if_overdue>
+        <notify_user>true</notify_user>
+        <overdue_notify_user display_value="System Administrator">6816f79cc0a8016401c5a33be04be441</overdue_notify_user>
+        <publish_state>published</publish_state>
+        <roles/>
+        <scale_factor>1</scale_factor>
+        <schedule_period>0</schedule_period>
+        <schedule_type>on_demand</schedule_type>
+        <scoring_type>percent</scoring_type>
+        <signature/>
+        <sys_class_name>asmt_metric_type</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2016-08-26 11:18:33</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>036ca35cdb2d2a009cc45901cf9619ad</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>ProcessFeedback</sys_name>
+        <sys_package display_value="process_select" source="x_70016_process_se">84ae10a3db9de6009cc45901cf961925</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="process_select">84ae10a3db9de6009cc45901cf961925</sys_scope>
+        <sys_update_name>asmt_metric_type_036ca35cdb2d2a009cc45901cf9619ad</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2016-08-26 11:36:54</sys_updated_on>
+        <table>x_70016_process_se_processes</table>
+        <url/>
+    </asmt_metric_type>
+    <sys_translated_text action="delete_multiple" query="documentkey=036ca35cdb2d2a009cc45901cf9619ad"/>
+</record_update>
