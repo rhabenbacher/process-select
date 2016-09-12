@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <client_script><![CDATA[function($scope,$http,$q,$mdDialog,$location,$window,$timeout){
+  var vm = this;
+  var config = {};
+  var url = "/api/now/table/x_70016_process_se_surveyresults";
+
+  // Url Format
+  // http://localhost:8080/process_feedback/#?hierarchy1=hier1&hierarchy2=hier2&processName=processname
+  var urlParams = $location.search();
+  console.log(urlParams);
+  vm.survey = [];
+  vm.saving = {progress:0};
+  vm.initializing = true;
+
+  function addQuestion(questiontext,options){
+    var question = {
+      question:questiontext,
+      result:0,
+      options:options
+    };
+    vm.survey.push(question);
+  }
+
+  addQuestion("How does the process description fit to the implemented process?",
+                    [{value:0,text:"na"},
+                    {value:1,text:"no fit"},
+                    {value:2,text:"some fit"},
+                    {value:3,text:"major business cases described"},
+                    {value:4,text:"all business cases described"}]);
+  addQuestion("How well does the process support your daily business?",
+                    [{value:0,text:"na"},
+                    {value:1,text:"too many manual steps"},
+                    {value:2,text:"some automization required"},
+                    {value:3,text:"adequately supported"},
+                    {value:4,text:"perfectly supported"}]);
+
+  addQuestion("How is the quality of the IT applications used in the process?",
+                    [{value:0,text:"na"},
+                    {value:1,text:"poor"},
+                    {value:2,text:"some improvements needed"},
+                    {value:3,text:"adequate"},
+                    {value:4,text:"good"}]);
+
+  (function loadSurvey(){
+    var getUrl = url + '?hierarchy1='+encodeURIComponent(urlParams.hierarchy1)+"&hierarchy2="+encodeURIComponent(urlParams.hierarchy2)+"&processname="+encodeURIComponent(urlParams.processname)+"&user="+$scope.user.user_name;
+    console.log(getUrl);
+    $http.get(getUrl,config).then(function(success){
+      console.log(success);
+      if (Array.isArray(success.data.result) && (success.data.result.length > 0))
+      {
+        var lastUpdate;
+        success.data.result.forEach(function(oldSurvey){
+          vm.survey[oldSurvey.questionid].result = parseInt(oldSurvey.resultdecimal);
+          vm.survey[oldSurvey.questionid].sys_id = oldSurvey.sys_id;
+          lastUpdate = new Date(oldSurvey.sys_updated_on.substring(0,10));
+        });
+        vm.loadMessage = "You already gave feedback on "+lastUpdate.toLocaleDateString()+". This feedback will be overwritten with the data you enter now!";
+
+      }
+      vm.initializing = false;
+
+    });
+  })();
+
+
+
+  vm.submitSurvey = function(){
+    var promises = [];
+    surveySaving(1);
+    vm.survey.forEach(function(question,index){
+      console.log('result'+index+':'+question.result);
+      promises.push(postSurveyQuestion(index,question));
+    });
+    $q.all(promises).then(function(success){
+      surveySaving(2);
+      console.log('all posts successfull saved!');
+    },function(error){
+      surveySaving(3);
+      console.log('error in at least one post successfull!');
+    });
+  };
+
+    function postSurveyQuestion(index,question){
+      var deferred = $q.defer();
+      var surveyResult = { hierarchy1:urlParams.hierarchy1,
+                           hierarchy2:urlParams.hierarchy2,
+                           processname:urlParams.processname,
+                           user:$scope.user.user_name,
+                           surveyid:"ProcessSurvey01",
+                           questionid:index,
+                           resultdecimal:question.result};
+      var httpObj = (question.sys_id) ? {method:"PATCH",url:url+'/'+question.sys_id,data:surveyResult,config:config} :
+      {method:"POST",url:url,data:surveyResult,config:config};
+
+      $http(httpObj).then(function(success){
+        deferred.resolve(success);
+      }, function(error){
+        deferred.reject(error);
+      });
+      return deferred.promise;
+  }
+
+  function surveySaving(progress) {
+    var savingText = ["","Saving Survey ....","Survey saved!","Error saving Survey"];
+    vm.saving.progress = progress;
+    vm.saving.text = savingText[progress];
+  }
+
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.SliderPadding {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+@media (max-width: 960px) {
+    .XS100 {
+      min-width:95%;
+    }
+  }
+</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description>Give feedback to a process</description>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id/>
+        <internal>false</internal>
+        <link/>
+        <name>process_feedback</name>
+        <option_schema/>
+        <public>true</public>
+        <roles/>
+        <script><![CDATA[(function() {
+  /* populate the 'data' object */
+  /* e.g., data.table = $sp.getValue('table'); */
+	data.user = gs.getUser();
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2016-09-02 07:51:24</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_id>0f8f32eadbedaa009cc45901cf96198a</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_name>process_feedback</sys_name>
+        <sys_package display_value="process_select" source="x_70016_process_se">84ae10a3db9de6009cc45901cf961925</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="process_select">84ae10a3db9de6009cc45901cf961925</sys_scope>
+        <sys_update_name>sp_widget_0f8f32eadbedaa009cc45901cf96198a</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2016-09-12 12:05:17</sys_updated_on>
+        <template><![CDATA[<div ng-cloak="">
+<!-- your widget template -->
+    <md-content class="md-padding" layout="column">
+    <h1 class="md-headline">Process Feedback</h1>
+    <md-progress-linear ng-disabled="!c.initializing" class="md-accent"></md-progress-linear>
+
+
+    <section layout="column" ng-if = "c.loadMessage" ng-hide="(c.saving.progress >= 1)" layout-align="center center" class="md-body-2">
+      <p md-colors="{color:'accent-hue-3'}">{{c.loadMessage}}</p>
+    </section>
+    <section>
+      <survey-question ng-repeat="surveypart in c.survey" question="surveypart.question" options="surveypart.options" result="surveypart.result"></question>
+    </section>
+
+
+    <section layout-gt-sm="row" layout="column" layout-align="end center" class="md-padding">
+      <md-button class="md-raised" ng-disabled="c.saving.progress >=1">Cancel</md-button>
+      <md-button class="md-accent md-raised" ng-click="c.submitSurvey()" ng-disabled="c.saving.progress >=1">Submit Survey</md-button>
+    </section>
+
+    <section ng-class="{'visible' : '(c.saving.progress >= 1)'}" layout-gt-sm="row" layout="column" layout-align="end center" class="md-body-2">
+      <md-progress-linear md-mode="query" ng-disabled="!(c.saving.progress == 1)" class="md-accent"></md-progress-linear>
+        <div style="min-width:150px;padding-left:10px;" class="">
+          <p md-colors="{color:'accent-hue-3'}" style="text-align:center;">{{c.saving.text}}</p>
+        </div>
+    <section>
+
+  </md-content>
+
+</div>]]></template>
+    </sp_widget>
+</record_update>

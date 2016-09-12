@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script/>
+        <description/>
+        <direct>true</direct>
+        <endpoint>x_70016_process_se_process_select.do</endpoint>
+        <html><![CDATA[<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-messages.min.js"></script>
+    <!-- Angular Material style sheet -->
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css"></link>
+
+    <script src="x_70016_process_se.process_select.jsdbx"></script>
+ 
+</head>
+
+<body ng-app='processSelect' ng-cloak="" ng-controller="mainCtrl as c">
+<!-- your widget template -->
+  <md-content class="md-padding" layout="column">
+      <section>
+        <h2 class="md-title">Select a process</h2>
+      </section>
+      <section>
+        <md-autocomplete
+              md-selected-item-change="c.loadImage(c.selectedProcess)"
+              md-selected-item="c.selectedProcess"
+              md-search-text="c.searchText"
+              md-items="item in c.getProcesses(searchText)"
+              md-item-text="item.display"
+              md-min-length="0"
+              md-select-on-match ="true"
+              md-autoselect="true"
+              placeholder="click or write">
+    <md-item-template>
+      <span md-highlight-text="c.searchText" md-highlight-flags="i">{{item.display}}</span>
+    </md-item-template>
+    <md-not-found>
+      No processes matching "{{c.searchText}}" could be found.
+    </md-not-found>
+  </md-autocomplete>
+      </section>
+
+	<section layout="row" layout-sm="column" layout-align="space-around" ng-hide="!c.progressShow">
+      <md-progress-circular ng-if="c.progressShow" md-mode="indeterminate" class="md-accent"></md-progress-circular>
+  </section>
+
+  </md-content>
+</body></html>
+]]></html>
+        <name>process_select</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2016-09-01 15:47:50</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_id>8c736792db2daa009cc45901cf961960</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>process_select</sys_name>
+        <sys_package display_value="process_select" source="x_70016_process_se">84ae10a3db9de6009cc45901cf961925</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="process_select">84ae10a3db9de6009cc45901cf961925</sys_scope>
+        <sys_update_name>sys_ui_page_8c736792db2daa009cc45901cf961960</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2016-09-01 15:57:53</sys_updated_on>
+    </sys_ui_page>
+</record_update>

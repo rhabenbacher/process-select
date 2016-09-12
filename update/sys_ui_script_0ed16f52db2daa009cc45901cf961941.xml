@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_ui_script">
+    <sys_ui_script action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <description/>
+        <global>false</global>
+        <name>x_70016_process_se.process_select</name>
+        <script><![CDATA[angular.module('processSelect', ['ngMaterial'])
+.controller('mainCtrl',mainCtrl)
+.directive('ngLoad', ['$parse', function($parse){
+
+        return {
+            restrict: 'A',
+            link: function(scope,element, attr) {
+              element.bind('load', function() {
+                   //call the function that was passed
+                   scope.$apply(attr.ngLoad);
+               });
+
+                          }
+        };
+
+    }]);
+
+
+
+  function mainCtrl($scope,$http,$q,$mdDialog,$location,$window)
+  {
+
+  var c = this;
+	c.progressShow = false;
+  var url = 'https://dev26396.service-now.com/api/now/table/x_70016_process_se_processes';
+  var config = {};
+  // Username Password Base64 Encoding for test only.
+  var deferred = $q.defer();
+
+
+  $http.get(url,config).then(function(data){
+    c.processlist = data.data.result;
+    for (var i=0;i<c.processlist.length;i++){
+      c.processlist[i].display = c.processlist[i].hierarchy1 + '/' + c.processlist[i].hierarchy2 + '/' + c.processlist[i].processname;
+      c.processlist[i].search = c.processlist[i].display.toLowerCase();
+    }
+		console.log(c.processlist);
+    deferred.resolve(c.processlist);
+  });
+
+
+
+
+  c.getProcesses = function(query){
+		console.log(query);
+    if (c.processlist === undefined){
+			return deferred.promise;
+    }
+
+		return query ? c.processlist.filter( createFilterFor(query) ) : c.processlist ;
+
+  };
+
+
+  c.loadImage = function(obj) {
+    console.log('loadImage');
+    if (!obj){
+      return;
+    }
+    c.progressShow = true;
+    console.log(obj);
+    var urlImg="https://dev26396.service-now.com/api/now/attachment?sysparm_limit=1&table_sys_id="+obj.sys_id;
+    c.image = {title:obj.processname};
+    $http.get(urlImg).then(function(res){
+        console.log(res);
+        c.image.url=res.data.result[0].download_link;
+        c.image.style={'width':'100%','height':'auto'};
+        c.progressShow = false;
+        var parentEl = angular.element(document.body);
+				$mdDialog.show({
+          scope: $scope,
+          template: '<md-dialog aria-label="ProcessConfirmation" class="FullScreenDialog">'+
+          '<md-toolbar class="md-accent md-hue-3">'+
+          ' <div class="md-toolbar-tools">'+
+          '<h3 class="md-title">{{c.image.title}}</h3>'+
+          '</div></md-toolbar>'+
+          '<md-dialog-content>'+
+          ' <div class="md-dialog-content">'+
+          ' <div layout="row" layout-sm="column" layout-align="space-around">'+
+          ' <md-progress-circular ng-if="!loaded27" md-mode="indeterminate" class="md-accent md-hue-3"></md-progress-circular>'+
+          ' </div>'+
+          '  <img ng-src="{{c.image.url}}" ng-style="c.image.style" ng-load="imageLoaded()"/>'+
+          ' </div>'+
+          '</md-dialog-content>' +
+          '<md-dialog-actions layout="row">' +
+          '   <md-button ng-click="zoom(factor100)">100%</md-button>'+
+          '   <md-button ng-click="zoom(factor125)" hide-xs>125%</md-button>'+
+          '   <md-button ng-click="zoom(factor150)" hide-gt-xs>150%</md-button>'+
+          '    <span flex></span>'+
+          '    <md-button ng-click="cancel()">' +
+          '       Cancel' +
+          '   </md-button>' +
+          '    <md-button ng-click="nextStep()" class="md-accent">' +
+          '       Continue' +
+          '   </md-button>' +
+          '</md-dialog-actions>' +
+          '</md-dialog>',
+          parent: parentEl,
+          fullscreen:true,
+					controller: function DialogController($scope, $mdDialog) {
+						console.log('DialogControler');
+						console.log($scope.c.image);
+            $scope.factor150 = '150%';
+						$scope.factor125 = '125%';
+						$scope.factor100 = '100%';
+						$scope.hide = function() {
+							$mdDialog.hide();
+						};
+						$scope.cancel = function() {
+							$mdDialog.cancel();
+						};
+						$scope.nextStep = function() {
+							$mdDialog.hide();
+						};
+						$scope.imageLoaded = function(){
+								console.log('image loaded');
+								$scope.loaded27 = true;
+							};
+						$scope.zoom = function(factor){
+							$scope.c.image.style.width = factor;
+						};
+
+
+          }
+
+    })
+        .then(function(answer) {
+
+          // anpassen - was geht in servicenow
+          //$location.url('/next/step/?id='+obj.sys_id);
+          //$window.location.href = '/next/step/?id='+obj.sys_id;
+          //$window.location.href = 'https://www.google.de';
+          c.selectedProcess = undefined;
+          c.searchText = "";
+          $window.location.href = '/process_feedback/#?hierarchy1='+encodeURIComponent(obj.hierarchy1)+'&hierarchy2='+encodeURIComponent(obj.hierarchy2)+'&processname='+encodeURIComponent(obj.processname);
+          //?hierarchy1=hier1&hierarchy2=hier2&processname=processname
+        }, function() {
+
+          c.selectedProcess = undefined;
+          c.searchText = "";
+          c.status = 'You cancelled the dialog.';
+        });
+
+    });
+  };
+
+
+
+
+
+  function createFilterFor(query) {
+        var lowercaseQuery = angular.lowercase(query);
+        return function filterFn(state) {
+          return (state.search.indexOf(lowercaseQuery) >= 0);
+        };
+      }
+
+}
+]]></script>
+        <script_name>process_select</script_name>
+        <sys_class_name>sys_ui_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2016-09-01 15:39:55</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_id>0ed16f52db2daa009cc45901cf961941</sys_id>
+        <sys_mod_count>7</sys_mod_count>
+        <sys_name>x_70016_process_se.process_select</sys_name>
+        <sys_package display_value="process_select" source="x_70016_process_se">84ae10a3db9de6009cc45901cf961925</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="process_select">84ae10a3db9de6009cc45901cf961925</sys_scope>
+        <sys_update_name>sys_ui_script_0ed16f52db2daa009cc45901cf961941</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2016-09-01 15:53:28</sys_updated_on>
+        <use_scoped_format>false</use_scoped_format>
+    </sys_ui_script>
+</record_update>

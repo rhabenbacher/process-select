@@ -2,39 +2,42 @@
 <record_update table="sp_widget">
     <sp_widget action="INSERT_OR_UPDATE">
         <client_script><![CDATA[function($scope,$http,$q,$mdDialog,$location,$window,$parse){
-  var c = this;	
+    var c = this;
 	c.progressShow = false;
-  var url = 'https://dev26396.service-now.com/api/now/table/x_70016_process_se_processes';
-  var config = {}; 
-	//{headers:{authorization:'Basic '+base64Service.encode('admin:Service2016')}};
+	c.version=angular.version.full;
+  var url = '/api/now/table/x_70016_process_se_processes';
+	var config = {};
+  //var config = {headers:{authorization:'Basic '+base64Service.encode('admin:Service2016')}};
   // Username Password Base64 Encoding for test only.
   var deferred = $q.defer();
+	console.log($scope.user);
+	console.log($window.location.origin);
 
 
   $http.get(url,config).then(function(data){
-    c.data = data.data.result;
-    for (var i=0;i<c.data.length;i++){
-      c.data[i].display = c.data[i].hierarchy1 + '/' + c.data[i].hierarchy2 + '/' + c.data[i].processname;
-      c.data[i].search = c.data[i].display.toLowerCase();
+    c.processlist = data.data.result;
+    for (var i=0;i<c.processlist.length;i++){
+      c.processlist[i].display = c.processlist[i].hierarchy1 + '/' + c.processlist[i].hierarchy2 + '/' + c.processlist[i].processname;
+      c.processlist[i].search = c.processlist[i].display.toLowerCase();
     }
-		console.log(c.data);
-    deferred.resolve(c.data);
+		console.log(c.processlist);
+    deferred.resolve(c.processlist);
   });
-	
+
 
 
 
   c.getProcesses = function(query){
 		console.log(query);
-    if (c.data === undefined){
+    if (c.processlist === undefined){
 			return deferred.promise;
     }
-    
-		return query ? c.data.filter( createFilterFor(query) ) : c.data ;
+
+		return query ? c.processlist.filter( createFilterFor(query) ) : c.processlist ;
 
   };
-	
-	  
+
+
   c.loadImage = function(obj) {
     console.log('loadImage');
     if (!obj){
@@ -42,14 +45,21 @@
     }
     c.progressShow = true;
     console.log(obj);
-    var urlImg="https://dev26396.service-now.com/api/now/attachment?sysparm_limit=1&table_sys_id="+obj.sys_id;
+    var urlImg="/api/now/attachment?sysparm_limit=1&table_sys_id="+obj.sys_id;
     c.image = {title:obj.processname};
     $http.get(urlImg).then(function(res){
         console.log(res);
         c.image.url=res.data.result[0].download_link;
         c.image.style={'width':'100%','height':'auto'};
-        c.progressShow = false;
-				$mdDialog.show({
+				c.image.contentType = res.data.result[0].content_type;
+        var config_img = config;
+        config_img.responseType = "arraybuffer";
+        $http.get(c.image.url,config_img).then(function(res){
+          console.log(res);
+          c.image.data = "data:"+c.image.contentType+";base64,"+_arrayBufferToBase64(res.data);
+       	  c.progressShow = false;
+       		 var parentEl = angular.element(document.body);
+					$mdDialog.show({
           scope: $scope,
           template: '<md-dialog aria-label="ProcessConfirmation" class="FullScreenDialog">'+
           '<md-toolbar class="md-accent md-hue-3">'+
@@ -61,7 +71,7 @@
           ' <div layout="row" layout-sm="column" layout-align="space-around">'+
           ' <md-progress-circular ng-if="!loaded27" md-mode="indeterminate" class="md-accent md-hue-3"></md-progress-circular>'+
           ' </div>'+
-          '  <img ng-src="{{c.image.url}}" ng-style="c.image.style" ng-load="imageLoaded()"/>'+
+          '  <img ng-src="{{c.image.data}}" ng-style="c.image.style" ng-load="imageLoaded()"/>'+
           ' </div>'+
           '</md-dialog-content>' +
           '<md-dialog-actions layout="row">' +
@@ -77,7 +87,7 @@
           '   </md-button>' +
           '</md-dialog-actions>' +
           '</md-dialog>',
-          parent: angular.element(document.body),
+          parent: parentEl,
           fullscreen:true,
 					controller: function DialogController($scope, $mdDialog) {
 						console.log('DialogControler');
@@ -102,41 +112,52 @@
 							$scope.c.image.style.width = factor;
 						};
 
-						
+
           }
 
     })
         .then(function(answer) {
-        
+
           // anpassen - was geht in servicenow
           //$location.url('/next/step/?id='+obj.sys_id);
           //$window.location.href = '/next/step/?id='+obj.sys_id;
           //$window.location.href = 'https://www.google.de';
           c.selectedProcess = undefined;
           c.searchText = "";
-          $window.location.href = '/process_feedback/#?hierarchy1='+encodeURIComponent(obj.hierarchy1)+'&hierarchy2='+encodeURIComponent(obj.hierarchy2)+'&processname='+encodeURIComponent(obj.processname);
+          $window.location.href = 'sp?id=process_feedback2&hierarchy1=' +encodeURIComponent(obj.hierarchy1)+'&hierarchy2='+encodeURIComponent(obj.hierarchy2)+'&processname='+encodeURIComponent(obj.processname);
           //?hierarchy1=hier1&hierarchy2=hier2&processname=processname
         }, function() {
-       
-          c.selectedProcess = undefined;
+
           c.searchText = "";
           c.status = 'You cancelled the dialog.';
+		  $window.location.reload();			
         });
 
     });
+	});	
   };
 
 
 
-  
 
-  function createFilterFor(query) {
+	function createFilterFor(query) {
         var lowercaseQuery = angular.lowercase(query);
-        return function filterFn(state) {
-          return (state.search.indexOf(lowercaseQuery) >= 0);
-        };
+        return function filterFn(process){
+          return (process.search.indexOf(lowercaseQuery) >= 0);
+    };
       }
-
+	
+	function _arrayBufferToBase64( buffer ) {
+        var binary = '';
+        var bytes = new Uint8Array( buffer );
+        var len = bytes.byteLength;
+        for (var i = 0; i < len; i++) {
+          binary += String.fromCharCode( bytes[ i ] );
+        }
+        return window.btoa( binary );
+      }
+  
+      
 }
 ]]></client_script>
         <controller_as>c</controller_as>
@@ -176,6 +197,10 @@
   /* populate the 'data' object */
   /* e.g., data.table = $sp.getValue('table'); */
 
+	data.user = gs.getUser();
+	
+	
+	
 })();]]></script>
         <servicenow>false</servicenow>
         <sys_class_name>sp_widget</sys_class_name>
@@ -183,7 +208,7 @@
         <sys_created_on>2016-08-29 13:26:02</sys_created_on>
         <sys_customer_update>true</sys_customer_update>
         <sys_id>d096ef51db2d6a009cc45901cf9619cc</sys_id>
-        <sys_mod_count>56</sys_mod_count>
+        <sys_mod_count>94</sys_mod_count>
         <sys_name>process_select</sys_name>
         <sys_package display_value="process_select" source="x_70016_process_se">84ae10a3db9de6009cc45901cf961925</sys_package>
         <sys_policy/>
@@ -191,19 +216,20 @@
         <sys_scope display_value="process_select">84ae10a3db9de6009cc45901cf961925</sys_scope>
         <sys_update_name>sp_widget_d096ef51db2d6a009cc45901cf9619cc</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2016-08-29 18:03:40</sys_updated_on>
+        <sys_updated_on>2016-09-12 12:04:13</sys_updated_on>
         <template><![CDATA[<div>
+  <div class="container">
 <!-- your widget template -->
   <md-content class="md-padding" layout="column">
       <section>
-        <h2 class="md-title">Select a process</h2>
+        <h2 class="md-title">Select a process - Angular {{c.version}}</h2>
       </section>
       <section>
         <md-autocomplete
               md-selected-item-change="c.loadImage(c.selectedProcess)"
               md-selected-item="c.selectedProcess"
               md-search-text="c.searchText"
-              md-items="item in c.getProcesses(searchText)"
+              md-items="item in c.getProcesses(c.searchText)"
               md-item-text="item.display"
               md-min-length="0"
               md-select-on-match ="true"
@@ -223,6 +249,6 @@
   </section>		
 	
   </md-content>
-</div>]]></template>
+</div> </div>]]></template>
     </sp_widget>
 </record_update>

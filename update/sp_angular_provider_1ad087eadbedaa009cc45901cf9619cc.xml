@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_angular_provider">
+    <sp_angular_provider action="INSERT_OR_UPDATE">
+        <name>surveyQuestion</name>
+        <script><![CDATA[function(){
+  return {
+  restrict:'E',
+  scope: {question:'<',options:'<',result:'='},
+  template:
+  '<div layout-gt-sm="row" layout="column" layout-align="start center">'+
+  '  <div flex-gt-sm="50" flex class="XS100">'+
+  '    <h4>{{question}}</h4>'+
+    '</div>'+
+  '<div flex-gt-sm="50" flex class="XS100">'+
+    '<div layout="row" >'+
+  '<md-slider-container class="SliderPadding" flex="60" >'+
+  '  <md-slider class="md-accent md-hue-3" md-discrete min="0" max="4" step="1" ng-model="result" id="slider1" aria-label="slider1">'+
+  '  </md-slider> </md-slider-container>'+
+  '<md-select flex="40" ng-model="result" class="md-no-underline"  aria-label="slider1" style="min-width:50px;">'+
+  '  <md-option ng-repeat="option in options" ng-value="option.value">{{option.text}}</md-option>'+
+'  </md-select>  </div> </div> </div>'
+
+};
+}]]></script>
+        <sys_class_name>sp_angular_provider</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2016-09-02 07:53:46</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_id>1ad087eadbedaa009cc45901cf9619cc</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>surveyQuestion</sys_name>
+        <sys_package display_value="process_select" source="x_70016_process_se">84ae10a3db9de6009cc45901cf961925</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="process_select">84ae10a3db9de6009cc45901cf961925</sys_scope>
+        <sys_update_name>sp_angular_provider_1ad087eadbedaa009cc45901cf9619cc</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2016-09-02 07:53:46</sys_updated_on>
+        <type>directive</type>
+    </sp_angular_provider>
+</record_update>
