@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+    <element label="process_import" max_length="40" name="x_70016_process_se_process_import" type="collection">
+        <element label="Atx author" max_length="80" name="atx_author" type="string"/>
+        <element label="At name" max_length="240" name="at_name" type="string_full_utf8"/>
+        <element label="At pers resp" max_length="80" name="at_pers_resp" type="string"/>
+        <element label="At valid from" max_length="40" name="at_valid_from" type="glide_date_time"/>
+        <element label="At valid until" max_length="40" name="at_valid_until" type="glide_date_time"/>
+        <element label="id" max_length="120" name="id" type="string"/>
+        <element label="Img content" max_length="4000000" name="img_content" type="string_full_utf8"/>
+        <element label="img_dataType" max_length="80" name="img_datatype" type="string"/>
+        <element label="lcid" max_length="120" name="lcid" type="string"/>
+        <element label="link" max_length="1024" name="link" type="url"/>
+    </element>
+</database>

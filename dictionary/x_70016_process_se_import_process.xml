@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+    <element extends="sys_import_set_row" label="import_process" max_length="40" name="x_70016_process_se_import_process" type="collection"/>
+</database>

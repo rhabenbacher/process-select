@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update>
+    <sys_documentation element="atx_author" label="Atx author" language="en" table="x_70016_process_se_process_import">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>atx_author</element>
+            <help/>
+            <hint/>
+            <label>Atx author</label>
+            <language>en</language>
+            <name>x_70016_process_se_process_import</name>
+            <plural>Atx authors</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2016-09-13 12:03:10</sys_created_on>
+            <sys_customer_update>false</sys_customer_update>
+            <sys_id>34932496dbb5ae009cc45901cf961924</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>Atx author</sys_name>
+            <sys_package display_value="process_select" source="x_70016_process_se">84ae10a3db9de6009cc45901cf961925</sys_package>
+            <sys_policy/>
+            <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+            <sys_scope display_value="process_select">84ae10a3db9de6009cc45901cf961925</sys_scope>
+            <sys_update_name>sys_documentation_x_70016_process_se_process_import_atx_author_en</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2016-09-13 12:03:10</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

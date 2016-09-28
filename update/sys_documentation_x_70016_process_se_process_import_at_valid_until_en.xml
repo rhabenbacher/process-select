@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update>
+    <sys_documentation element="at_valid_until" label="At valid until" language="en" table="x_70016_process_se_process_import">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>at_valid_until</element>
+            <help/>
+            <hint/>
+            <label>At valid until</label>
+            <language>en</language>
+            <name>x_70016_process_se_process_import</name>
+            <plural>At valid untils</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2016-09-13 13:02:06</sys_created_on>
+            <sys_customer_update>false</sys_customer_update>
+            <sys_id>8c11349adbb5ae009cc45901cf9619da</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>At valid until</sys_name>
+            <sys_package display_value="process_select" source="x_70016_process_se">84ae10a3db9de6009cc45901cf961925</sys_package>
+            <sys_policy/>
+            <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+            <sys_scope display_value="process_select">84ae10a3db9de6009cc45901cf961925</sys_scope>
+            <sys_update_name>sys_documentation_x_70016_process_se_process_import_at_valid_until_en</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2016-09-13 13:02:06</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

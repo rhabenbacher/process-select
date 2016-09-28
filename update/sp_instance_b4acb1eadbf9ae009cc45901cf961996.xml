@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_instance">
+    <sp_instance action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <class_name/>
+        <color>default</color>
+        <css/>
+        <glyph/>
+        <id/>
+        <order>0</order>
+        <short_description/>
+        <size>md</size>
+        <sp_column display_value="1">929cb1eadbf9ae009cc45901cf9619a0</sp_column>
+        <sp_widget display_value="process_info">b6b879aadbf9ae009cc45901cf961915</sp_widget>
+        <sys_class_name>sp_instance</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2016-09-14 13:10:46</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_id>b4acb1eadbf9ae009cc45901cf961996</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="process_select" source="x_70016_process_se">84ae10a3db9de6009cc45901cf961925</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="process_select">84ae10a3db9de6009cc45901cf961925</sys_scope>
+        <sys_update_name>sp_instance_b4acb1eadbf9ae009cc45901cf961996</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2016-09-15 14:00:59</sys_updated_on>
+        <title/>
+        <url/>
+        <widget_parameters><![CDATA[{
+	"hierarchy1groupby": {
+		"value": "CRM",
+		"displayValue": "CRM"
+	}
+}]]></widget_parameters>
+    </sp_instance>
+</record_update>

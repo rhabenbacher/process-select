@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <client_script><![CDATA[function($scope) {
+  /* widget controller */
+  var vm = this;
+  vm.count = $scope.data.count;
+	console.log(vm.count);
+				
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>h1,p,sup {
+margin:0;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>process-engage</id>
+        <internal>false</internal>
+        <link/>
+        <name>process_engage</name>
+        <option_schema/>
+        <public>true</public>
+        <roles/>
+        <script><![CDATA[(function() {
+  /* populate the 'data' object */
+  /* e.g., data.table = $sp.getValue('table'); */
+
+		
+	
+	
+		var ga = new GlideAggregate('x_70016_process_se_surveyresults');
+		
+		ga.groupBy('hierarchy1');
+		ga.groupBy('hierarchy2');
+		ga.groupBy('processname');
+		ga.groupBy('surveyid');
+		ga.groupBy('user');
+		// ga.addAggregate('COUNT');
+		
+		
+		var sevendays = gs.daysAgo(7);
+		console.log(sevendays);
+		ga.addQuery('sys_updated_on','>=',sevendays);
+		ga.query();
+		
+		data.count = 0;
+		while (ga.next()){
+
+			data.count ++;
+			console.log(data.count);
+		}
+		
+		
+		})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2016-09-21 15:36:24</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_id>da11aab8db8e22409cc45901cf96196c</sys_id>
+        <sys_mod_count>35</sys_mod_count>
+        <sys_name>process_engage</sys_name>
+        <sys_package display_value="process_select" source="x_70016_process_se">84ae10a3db9de6009cc45901cf961925</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="process_select">84ae10a3db9de6009cc45901cf961925</sys_scope>
+        <sys_update_name>sp_widget_da11aab8db8e22409cc45901cf96196c</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2016-09-21 17:20:23</sys_updated_on>
+        <template><![CDATA[<div ng-cloak="">
+<!-- your widget template -->
+ 
+   <md-card class="md-card">
+      <md-card-content style="text-align:center;">
+          <p class="md-body-1">
+            Feedbacks last week
+          </p>
+          <p class="md-display-1">{{c.count}}</p>
+      </md-card-content>
+      <md-card-actions layout="row" layout-align="center center">
+         <md-button >Show feedbacks</md-button>
+         <!-- <md-card-icon-actions>
+           <md-button class="md-icon-button" aria-label="icon">
+             <md-icon class="material-icons">backup</md-icon>
+           </md-button>
+         </md-card-icon-actions> -->
+       </md-card-actions>
+  </md-card>
+</div>]]></template>
+    </sp_widget>
+</record_update>

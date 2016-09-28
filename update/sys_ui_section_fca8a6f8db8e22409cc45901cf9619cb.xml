@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update>
+    <sys_ui_section caption="" section_id="fca8a6f8db8e22409cc45901cf9619cb" sys_domain="global" table="x_70016_process_se_surveyresults" version="3" view="">
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>hierarchy1</element>
+            <position>0</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2016-09-21 16:10:38</sys_created_on>
+            <sys_id>77e82efcdb8e22409cc45901cf9619b0</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_70016_process_se_surveyresults" sys_domain="global" view="Default view">fca8a6f8db8e22409cc45901cf9619cb</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2016-09-21 16:10:38</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>hierarchy2</element>
+            <position>1</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2016-09-21 16:10:38</sys_created_on>
+            <sys_id>f7e82efcdb8e22409cc45901cf9619b0</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_70016_process_se_surveyresults" sys_domain="global" view="Default view">fca8a6f8db8e22409cc45901cf9619cb</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2016-09-21 16:10:38</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>processname</element>
+            <position>2</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2016-09-21 16:10:38</sys_created_on>
+            <sys_id>7be82efcdb8e22409cc45901cf9619b0</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_70016_process_se_surveyresults" sys_domain="global" view="Default view">fca8a6f8db8e22409cc45901cf9619cb</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2016-09-21 16:10:38</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>questionid</element>
+            <position>3</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2016-09-21 16:10:38</sys_created_on>
+            <sys_id>fbe82efcdb8e22409cc45901cf9619b0</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_70016_process_se_surveyresults" sys_domain="global" view="Default view">fca8a6f8db8e22409cc45901cf9619cb</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2016-09-21 16:10:38</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>sys_created_on</element>
+            <position>4</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2016-09-21 16:10:38</sys_created_on>
+            <sys_id>7fe82efcdb8e22409cc45901cf9619b0</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_70016_process_se_surveyresults" sys_domain="global" view="Default view">fca8a6f8db8e22409cc45901cf9619cb</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2016-09-21 16:10:38</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>.split</element>
+            <position>5</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2016-09-21 16:10:38</sys_created_on>
+            <sys_id>ffe82efcdb8e22409cc45901cf9619b0</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_70016_process_se_surveyresults" sys_domain="global" view="Default view">fca8a6f8db8e22409cc45901cf9619cb</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2016-09-21 16:10:38</sys_updated_on>
+            <sys_user/>
+            <type>.split</type>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>surveyid</element>
+            <position>6</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2016-09-21 16:10:38</sys_created_on>
+            <sys_id>73e82efcdb8e22409cc45901cf9619b1</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_70016_process_se_surveyresults" sys_domain="global" view="Default view">fca8a6f8db8e22409cc45901cf9619cb</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2016-09-21 16:10:38</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>user</element>
+            <position>7</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2016-09-21 16:10:38</sys_created_on>
+            <sys_id>f3e82efcdb8e22409cc45901cf9619b1</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_70016_process_se_surveyresults" sys_domain="global" view="Default view">fca8a6f8db8e22409cc45901cf9619cb</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2016-09-21 16:10:38</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>resultdecimal</element>
+            <position>8</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2016-09-21 16:10:38</sys_created_on>
+            <sys_id>77e82efcdb8e22409cc45901cf9619b1</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_70016_process_se_surveyresults" sys_domain="global" view="Default view">fca8a6f8db8e22409cc45901cf9619cb</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2016-09-21 16:10:38</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>sys_updated_by</element>
+            <position>9</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2016-09-21 16:10:38</sys_created_on>
+            <sys_id>f7e82efcdb8e22409cc45901cf9619b1</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_70016_process_se_surveyresults" sys_domain="global" view="Default view">fca8a6f8db8e22409cc45901cf9619cb</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2016-09-21 16:10:38</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>sys_updated_on</element>
+            <position>10</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2016-09-21 16:10:38</sys_created_on>
+            <sys_id>7be82efcdb8e22409cc45901cf9619b1</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_70016_process_se_surveyresults" sys_domain="global" view="Default view">fca8a6f8db8e22409cc45901cf9619cb</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2016-09-21 16:10:38</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_section action="INSERT_OR_UPDATE">
+            <caption/>
+            <header>false</header>
+            <name>x_70016_process_se_surveyresults</name>
+            <roles/>
+            <sys_class_name>sys_ui_section</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2016-09-21 16:09:20</sys_created_on>
+            <sys_customer_update>true</sys_customer_update>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>fca8a6f8db8e22409cc45901cf9619cb</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>x_70016_process_se_surveyresults</sys_name>
+            <sys_overrides/>
+            <sys_package display_value="process_select" source="x_70016_process_se">84ae10a3db9de6009cc45901cf961925</sys_package>
+            <sys_policy/>
+            <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+            <sys_scope display_value="process_select">84ae10a3db9de6009cc45901cf961925</sys_scope>
+            <sys_update_name>sys_ui_section_fca8a6f8db8e22409cc45901cf9619cb</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2016-09-21 16:09:20</sys_updated_on>
+            <sys_user/>
+            <title>true</title>
+            <view display_value="Default view" name="NULL">Default view</view>
+            <view_name/>
+        </sys_ui_section>
+    </sys_ui_section>
+</record_update>
